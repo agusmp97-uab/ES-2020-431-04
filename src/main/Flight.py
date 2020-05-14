@@ -1,6 +1,6 @@
 
 class Flight:
-    def __init__(self, id_flight, price, origin, destiny):
+    def __init__(self,destiny, id_flight=None, price=0, origin=None):
         self.id = id_flight
         self.price = price
         self.destiny
