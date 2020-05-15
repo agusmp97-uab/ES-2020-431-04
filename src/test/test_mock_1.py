@@ -12,9 +12,9 @@
 #########
 import unittest
 from unittest import mock
-from src.Bank import Bank
-import Flights
-import Gestor as GS  # hem de tenir accés als classesdiverse.py. Falta com un __init__ per l'estructura o quelcom així.(Vaig faltar a la classe de FI sobre includes i sempre he arroseguat aquesta part :(
+from src.main.Bank import Bank
+import src.main.Flights
+#import Gestor as GS  # hem de tenir accés als classesdiverse.py. Falta com un __init__ per l'estructura o quelcom així.(Vaig faltar a la classe de FI sobre includes i sempre he arroseguat aquesta part :(
 
 class Test_mock_1(unittest.TestCase):
 

@@ -1,60 +1,55 @@
-import unittest
-from unittest import mock
-import main.Flights as FLS
-import main.Flight as FL
-
-num_passatgers = 4
-destincacions = ["BCN","PARIS","BERLIN","ESTOCOLM","MOSCOU"]
+import pytest
+from src.main.Flights import Flights
+from src.main.Flight import Flight
 
 
-class Test_v1(unittest.TestCase):
+@pytest.mark.parametrize("n_passengers, journey", [
+    (1, Flights(1, "BCN").add_flights([Flight("ROM", "1", 20), Flight("PAR","2",50), Flight("BCN","3",70)])),
+    (4, Flights(4, "BCN")),
+    (6, Flights(6, "BCN").add_flights([Flight("ROM", "1", 20), Flight("BCN","5",100)])),
+])
 
-    viaje_sin_destinos = FLS.Flights(num_passatgers)
-    viaje_anadir_destinos = FLS.Flights(num_passatgers)
+def test_get_n_passengers(n_passengers, journey):
+    assert journey.get_n_passengers() == n_passengers  # Need n_passatgers per guardar el nombre de viatjers
 
-    def test_num_viajeros(self,viaje_sin_destinos,num_passatgers):
-        assert viaje_sin_destinos.n_passatge == 4  # Need n_passatgers per guardar el nombre de viatjers
+@pytest.mark.parametrize("journey", [
+    (Flights(1, "BCN")),
+    (Flights(4, "BCN")),
+    (Flights(6, "BCN")),
+])
+def test_get_destinies_journey_wo_destinies(journey):
+    assert len(journey.get_destinies()) == 0  # Need atribut flights per guardar les destinacions
 
-    def test_sinDestinos_emptyDestlist(self,viaje_sin_destinos):
-        assert len(viaje_sin_destinos.Fligths) == 0  # Need atribut flights per guardar les destinacions
+@pytest.mark.parametrize("journey", [
+    (Flights(1, "BCN")),
+    (Flights(4, "BCN")),
+    (Flights(6, "BCN")),
+])
+def test_get_flights_journey_wo_destinies(journey):
+    assert len(journey.get_flights()) == 0  # Need atribut flights per guardar les destinacions
 
-    def test_sinVuelos(self,viaje_sin_destinos):
-        assert len(viaje_sin_destinos.Fligths) == 0  # Need atribut flights per guardar les destinacions
+@pytest.mark.parametrize("journey", [
+    (Flights(1, "BCN")),
+    (Flights(4, "BCN")),
+    (Flights(6, "BCN")),
+])
+def test_get_price_journey_wo_destinies(journey):
+    assert journey.get_price() == 0
 
-    def test_precioInicialZero(self,viaje_sin_destinos):
-        assert viaje_sin_destinos.total_price == 0
+@pytest.mark.parametrize("journey, flight, destinies", [
+    (Flights(1, "BCN").add_flights([Flight("ROM", "1", 20), Flight("PAR","2",50), Flight("BCN","3",70)])),
+    (Flights(4, "BCN")),
+    (Flights(6, "BCN").add_flights([Flight("ROM", "1", 20), Flight("BCN","5",100)])),
+])
 
-    def test_anadirDestino_Destlist(self, viaje_anadir_destinos, destincacions):
-        aux = viaje_anadir_destinos.Flights
-        aux.append(destincacions[0])
-        vol = FL.Flight(destincacions[0])  # la resta de parametres quede a NONE si no s'indiquen
-        viaje_anadir_destinos.add_flight(vol)
-        assert [f.get_destiny() for f in viaje_anadir_destinos.Flights] == aux  # mirem si ha quedat com ha de.
+def test_anadirDestino_Destlist(self, viaje_anadir_destinos, destincacions):
+    #aux = viaje_anadir_destinos.Flights
+    # aux.append(destincacions[0])
+    # vol = Flight(destincacions[0])  # la resta de parametres quede a NONE si no s'indiquen
+# viaje_anadir_destinos.add_flight(vol)
+    #assert [f.get_destiny() for f in viaje_anadir_destinos.Flights] == aux  # mirem si ha quedat com ha de.
 
-    def test_anadirDestino_Flighlist(self,viaje_anadir_destinos,destincacions):
-        aux = viaje_anadir_destinos.Flights
-        # aquí no pillo com funcionaria el què ha de passar perk un destino no porta incorporat el vol
+#def test_anadirDestino_Flighlist(self, viaje_anadir_destinos,destincacions):
+   # aux = viaje_anadir_destinos.Flights
+    # aquí no pillo com funcionaria el què ha de passar perk un destino no porta incorporat el vol
 
-    def test_anadirDestino_updatePrice(self):
-        pass
-
-    def test_anadirDestino_multiplesViajeros_updatePrice(self):
-        pass
-
-    def test_quitarDest_viajeMultiDest_Destlist(self):
-        pass
-
-    def test_quitarDest_viajeMultiDest_Flightlist(self):
-        pass
-
-    def test_quitarDest_viajeMultiDest_updatePrice(self):
-        pass
-
-    def test_multiDest_mulitViajeros_quitarDest_updatePrice(self):
-        pass
-
-    def test_multiDest_mulitViajeros_dopaymentOK_reportaOK(self): #  Aquest va al mock perquè cal mockejar la API perquè doni el TRUE a do_payment
-        pass
-
-    def test_multiDest_mulitViajeros_confirm_reserveOK_reportaOK(self):  # Aquest va al mock perquè cal mockejar la API perquè doni el TRUE a confirm_reserve
-        pass
