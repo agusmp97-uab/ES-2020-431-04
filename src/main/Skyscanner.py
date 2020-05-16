@@ -1,7 +1,6 @@
 from . import User
 from . import Flights
 
-
 class Skyscanner():
 
     def __init__(self):
