@@ -8,8 +8,8 @@ from src.main.Flights import Flights
 from src.main.PaymentData import PaymentData
 from src.main.User import User
 
-# creem els diferents test mock com def test_ ..............  sempre han de començar amb el key-word 'test_'
-class Test_mock_v2(unittest.TestCase):
+
+class TestMockV2(unittest.TestCase):
 
     payment = PaymentData("VISA","Juanma Pamundi", 123,123)
     payment.set_reserve_amount(1989)

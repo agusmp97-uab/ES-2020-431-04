@@ -3,11 +3,18 @@ from src.main.Flights import Flights
 from src.main.Flight import Flight
 from src.main.User import User
 from src.main.PaymentData import PaymentData
+from src.main.Journey import Journey
+from src.main.Bank import Bank
+from src.main.Skyscanner import Skyscanner
+from src.main.Booking import Booking
+from src.main.Rentalcars import Rentalcars
+
 
 @pytest.fixture(params=[1, 2, 3, 4, 5, 6, 7, 0, 23, 50])
 def empty_flights(request):
     flights = Flights(request.param, "BCN")
     return flights
+
 
 @pytest.fixture(params=[
     (1, "BCN", [Flight("ROM", "2", 50), Flight("PAR", "21", 100), Flight("PRA", "22", 200), Flight("BCN", "432", 200)]),
@@ -26,6 +33,7 @@ def flights_1_passenger(request):
     flights.add_flights(request.param[2])
     return flights, request.param
 
+
 @pytest.fixture(params=[
     (2, "BCN", [Flight("ROM", "2", 50), Flight("PAR", "21", 100), Flight("PRA", "22", 200), Flight("BCN", "432", 200)]),
     (3, "BCN", [Flight("ROM", "2", 50), Flight("BCN", "4", 40)]),
@@ -42,6 +50,7 @@ def flights_multiple_passengers(request):
     flights = Flights(request.param[0], request.param[1])
     flights.add_flights(request.param[2])
     return flights, request.param
+
 
 @pytest.fixture(params=[
     Flight("ROM", "2", 50),
@@ -62,6 +71,7 @@ def flight(request):
 @pytest.fixture(params=["PAR", "ROM", "ATH", "BER", "BAR", "MAD", "NY", "LON", "PRA", "LA"])
 def destiny(request):
     return request.param
+
 
 @pytest.fixture(params=[
     User("Pep Sanchez Sanchez", "12345678A", "09234", "666666666", "pep@sanchez.com"),

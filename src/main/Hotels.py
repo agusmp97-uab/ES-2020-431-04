@@ -1,7 +1,7 @@
 class Hotels:
 
     def __init__(self):
-        pass
+        self.hotels = []
 
     def get_price(self):
         return 0

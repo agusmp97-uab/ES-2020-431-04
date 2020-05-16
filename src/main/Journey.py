@@ -7,11 +7,11 @@ from . import Rentalcars
 from . import Bank
 
 class Journey:
-    def __init__(self, flights, user, payment_data, hotels=Hotels(), cars=Cars()):
-        self.bank = Bank()
-        self.skyscanner = Skyscanner()
-        self.rentalcars = Rentalcars()
-        self.booking = Booking()
+    def __init__(self, flights, user, payment_data, hotels=Hotels.Hotels(), cars=Cars.Cars()):
+        self.bank = Bank.Bank()
+        self.skyscanner = Skyscanner.Skyscanner()
+        self.rentalcars = Rentalcars.Rentalcars()
+        self.booking = Booking.Booking()
         self.flights = flights
         self.user = user
         self.payment_data = payment_data
@@ -38,5 +38,6 @@ class Journey:
 
     def do_payment(self):
         self.payment_data.calculate_reserve_amount(self.flights, self.hotels, self.cars)
-        self.bank.do_payment(self.user, self.payment_data)
+        return self.bank.do_payment(self.user, self.payment_data)
+
 
