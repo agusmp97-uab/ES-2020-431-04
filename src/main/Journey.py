@@ -34,7 +34,7 @@ class Journey:
         self.user = user
 
     def confirm_reserve_flights(self):
-        self.skyscanner.confirm_reserve(self.user, self.flights)
+        return self.skyscanner.confirm_reserve(self.user, self.flights)
 
     def do_payment(self):
         self.payment_data.calculate_reserve_amount(self.flights, self.hotels, self.cars)

@@ -1,37 +1,36 @@
+import src.main.Flights
+from src.test.conftest import *
 from src.main.Bank import Bank
 import src.main.Flights
+from src.main.Journey import Journey
+from src.test.conftest import *
 
-import unittest
-from unittest import mock
-from src.main.Flight import Flight
-from src.main.Flights import Flights
-from src.main.PaymentData import PaymentData
-from src.main.User import User
+# creem els diferents test mock com def test_ ..............  sempre han de començar amb el key-word 'test_'
 
 
-class TestMockV2(unittest.TestCase):
+class TestMockV2:
 
-    payment = PaymentData("VISA","Juanma Pamundi", 123,123)
-    payment.set_reserve_amount(1989)
-    client = User("Juanma Pamundi", 46991566, "postal_address", "phone_number", "email")
-    @mock.patch('src.main.Bank')  # creem un camaleo que es farà passar per la classe indicada ('   ')
-    @mock.patch(client)
-    @mock.patch(payment)
-    def test_more_than_one_of_all_paymentmode_ok(self, mock_bank, client, payment): # posem l'assignació del camaleó jus a sobre de la def del test
+    def test_more_than_one_of_all_paymentmode_ok(self, monkeypatch,  capsys, flights_multiple_passengers, user, payment_data): # posem l'assignació del camaleó jus a sobre de la def del test
+        def mockreturn(self, user, payment_data):
+            return True
 
-        mock_bank.do_payment.return_value = payment.payment_type
-        self.assertTrue(mock_bank.do_payment(client, payment), payment)
+        monkeypatch.setattr(Bank,"do_payment", mockreturn)
+        journey = Journey(flights_multiple_passengers[0],user, payment_data)
+        assert journey.payment_data.payment_type == payment_data.payment_type
 
+    def test_more_than_one_of_all_payment_fail(self, monkeypatch,  capsys, flights_multiple_passengers, user, payment_data): # posem l'assignació del camaleó jus a sobre de la def del test
+        def mockreturn(self, user, payment_data):
+            return False
 
+        monkeypatch.setattr(Bank,"do_payment", mockreturn)
+        journey = Journey(flights_multiple_passengers[0],user, payment_data)
+        assert journey.do_payment() == False
 
-    def test_more_than_one_of_all_paymentmode_false(self, mock_bank, client, payment): # posem l'assignació del camaleó jus a sobre de la def del test
-        mock_bank.do_payment.return_value = False  # Payment error
-        self.assertTrue(mock_bank.do_payment(client, payment), payment)
+    def test_more_than_one_of_all_flights_no_more(self, monkeypatch,  capsys, flights_multiple_passengers, user, payment_data): # posem l'assignació del camaleó jus a sobre de la def del test
+        aux, aux2 = flights_multiple_passengers
+        def mockreturn(self, user, aux):
+            return False
 
-
-
-    # @mock.patch('src.Bank')
-    # def test_avisoErrorPago(self,mock_Bank):
-    #     mock_Bank.do_payment.return_value = False
-    #     viatge = Flights() # la classe viatge o reserva que tinguem ...
-    #     self.assertFalse(gestor.realitzaPagament(viatge,mock_Bank))  # aquí li diem al nostre objecte gestor que envii ordre de pagament al banc per limport del viatge. Si el bank retorna False, el gestor comunicarà que no s'ha pogut cobrar amb un  false
+        monkeypatch.setattr(Skyscanner,"confirm_reserve", mockreturn)
+        journey = Journey(flights_multiple_passengers[0],user, payment_data)
+        assert journey.confirm_reserve_flights() == False
