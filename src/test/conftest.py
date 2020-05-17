@@ -36,15 +36,15 @@ def flights_1_passenger(request):
 
 @pytest.fixture(params=[
     (2, "BCN", [Flight("ROM", "2", 50), Flight("PAR", "21", 100), Flight("PRA", "22", 200), Flight("BCN", "432", 200)]),
-    (3, "BCN", [Flight("ROM", "2", 50), Flight("BCN", "4", 40)]),
-    (4, "BCN", [Flight("ROM", "2", 50), Flight("BCN", "4", 40)]),
+    (3, "BCN", [Flight("ROM", "2", 50), Flight("PEK", "789", 3000), Flight("BCN", "4", 40)]),
+    (4, "BCN", [Flight("ROM", "2", 50), Flight("MAR", "3", 200), Flight("BCN", "4", 40)]),
     (2, "ROM", [Flight("PAR", "21", 100), Flight("ROM", "22", 200)]),
     (2, "BCN", [Flight("NY", "1", 5000), Flight("LA", "2", 400), Flight("BCN", "3", 200)]),
     (3, "BCN", [Flight("ATH", "2", 500), Flight("BER", "3", 700), Flight("BCN", "4", 300)]),
-    (5, "BCN", [Flight("MAD", "2", 50), Flight("BCN", "21", 60)]),
-    (2, "BCN", [Flight("MAD", "2", 50), Flight("BCN", "21", 60)]),
-    (3, "BCN", []),
-    (2, "BCN", []),
+    (5, "BCN", [Flight("MAD", "2", 50), Flight("SEV", "45", 30), Flight("BCN", "21", 60)]),
+    (2, "BCN", [Flight("MAD", "2", 50), Flight("SEV", "45", 2), Flight("BCN", "21", 60)]),
+    (3, "LON", [Flight("PAR","1", 90), Flight("BRU", "2", 50), Flight("ROM", "4", 200), Flight("LON", "5", 500)]),
+    (2, "BCN", [Flight("PAR","1", 90), Flight("BRU", "2", 50), Flight("ROM", "4", 200), Flight("BCN", "5", 500)]),
 ])
 def flights_multiple_passengers(request):
     flights = Flights(request.param[0], request.param[1])
@@ -80,9 +80,17 @@ def destiny(request):
 def user(request):
     return request.param
 
-
 @pytest.fixture(params=[
-    PaymentData("VISA", "Pep Sanchez Sanchez", "123456789", "1234"),
+    ("VISA", "Pep Sanchez Sanchez", "123456789", "1234"),
 ])
 def payment_data(request):
-    return request.param
+    payment_data = PaymentData(request.param[0], request.param[1], request.param[2], request.param[3])
+    return payment_data, request.param
+
+@pytest.fixture(params=[
+    ("VISA", "Pep Sanchez Sanchez", "123456789", "1234"),
+    ("MASTER_CARD", "Pep Sanchez Sanchez", "123456789", "1234"),
+])
+def payment_data_type(request):
+    payment_data = PaymentData(request.param[0], request.param[1], request.param[2], request.param[3])
+    return payment_data, request.param

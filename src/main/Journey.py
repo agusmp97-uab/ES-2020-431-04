@@ -30,6 +30,9 @@ class Journey:
     def set_payment_data(self, payment_data):
         self.payment_data = payment_data
 
+    def get_payment_type(self):
+        return self.payment_data.get_payment_type()
+
     def set_user(self, user):
         self.user = user
 

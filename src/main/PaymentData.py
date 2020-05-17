@@ -14,3 +14,6 @@ class PaymentData:
     def calculate_reserve_amount(self, flights, hotels, cars) -> None:
         self.reserve_amount = flights.get_price() + hotels.get_price() + cars.get_price()
 
+    def get_payment_type(self):
+        return self.payment_type
+
