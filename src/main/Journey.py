@@ -16,10 +16,11 @@ class Journey:
         self.user = user
         self.payment_data = payment_data
         self.hotels = hotels
+        #self.hotels.set_n_passengers(self.flights.get_n_passengers())
         self.cars = cars
 
     def set_flights(self, flights):
-        self.flights = Flights
+        self.flights = flights
 
     def set_hotels(self, hotels):
         self.hotels = hotels

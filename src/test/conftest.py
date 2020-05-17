@@ -94,3 +94,28 @@ def payment_data(request):
 def payment_data_type(request):
     payment_data = PaymentData(request.param[0], request.param[1], request.param[2], request.param[3])
     return payment_data, request.param
+
+
+@pytest.fixture(params=[
+
+])
+def cars(request):
+    pass
+
+@pytest.fixture(params=[
+
+])
+def car(request):
+    pass
+
+@pytest.fixture(params=[
+
+])
+def hotels(request):
+    pass
+
+@pytest.fixture(params=[
+
+])
+def hotel(request):
+    pass
