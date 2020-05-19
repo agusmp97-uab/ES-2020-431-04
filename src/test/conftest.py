@@ -3,6 +3,8 @@ from src.main.Flights import Flights
 from src.main.Flight import Flight
 from src.main.User import User
 from src.main.PaymentData import PaymentData
+from src.main.Cars import Cars
+from src.main.Car import Car
 from src.main.Journey import Journey
 from src.main.Bank import Bank
 from src.main.Skyscanner import Skyscanner
@@ -97,8 +99,9 @@ def payment_data_type(request):
 
 
 @pytest.fixture(params=[
+    #(2, "BCN", [Flight("ROM", "2", 50), Flight("PAR", "21", 100), Flight("PRA", "22", 200), Flight("BCN", "432", 200)])
     ([Car("1234 ABC", "Toyota", "BCN", 120, 4), Car("6690 HKR", "Subaru", "ROM", 150, 4), Car("7642 DPN", "Tesla", "ATH", 400, 3)]),
-    ([Car("8321 SKR", "Tesla", "ATH", 400, 3), Car("9935 PAN", "Kia", "LYN", 170, 4)])
+    ([Car("8321 SKR", "Tesla", "ATH", 400, 3), Car("9935 PAN", "Kia", "LYN", 170, 4)]),
     ([Car("1234 ABC", "Toyota", "BCN", 120, 4), Car("8654 FGN", "Peugeot", "NYC", 200, 5), Car("1248 ARN", "Audi", "LA", 210, 6)]),
     ([Car("9621 XYZ", "Citroen", "PAR", 160, 5)]),
     ([Car("6690 HKR", "Subaru", "ROM", 150, 4), Car("3420 BRM", "Nissan", "BER", 280, 6)]),
@@ -109,7 +112,7 @@ def payment_data_type(request):
     ([Car("9621 XYZ", "Citroen", "PAR", 160, 5), Car("9935 PAN", "Kia", "LYN", 170, 4), Car("1234 ABC", "Toyota", "BCN", 120, 4)]),
 ])
 def cars(request):
-    cars = cars()
+    cars = Cars()
     cars.add_cars(request.param)
     return cars, request.param
 

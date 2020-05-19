@@ -20,7 +20,7 @@ class Cars:
         for car in cars:
             self.cars.append(car)
             self.total_price += car.get_price()
-        return self
+        #return self
 
     def remove_car(self, car) -> None:
         cars_aux = []

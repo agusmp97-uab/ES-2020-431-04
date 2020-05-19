@@ -45,5 +45,5 @@ class Journey:
         return self.bank.do_payment(self.user, self.payment_data)
 
     def confirm_reserve_cars(self):
-        return self.RentalCars.confirm_reserve(self.user, self.flights)
+        return self.rentalcars.confirm_reserve(self.user, self.cars)
 
