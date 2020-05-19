@@ -99,7 +99,6 @@ def payment_data_type(request):
 
 
 @pytest.fixture(params=[
-    #(2, "BCN", [Flight("ROM", "2", 50), Flight("PAR", "21", 100), Flight("PRA", "22", 200), Flight("BCN", "432", 200)])
     ([Car("1234 ABC", "Toyota", "BCN", 120, 4), Car("6690 HKR", "Subaru", "ROM", 150, 4), Car("7642 DPN", "Tesla", "ATH", 400, 3)]),
     ([Car("8321 SKR", "Tesla", "ATH", 400, 3), Car("9935 PAN", "Kia", "LYN", 170, 4)]),
     ([Car("1234 ABC", "Toyota", "BCN", 120, 4), Car("8654 FGN", "Peugeot", "NYC", 200, 5), Car("1248 ARN", "Audi", "LA", 210, 6)]),
