@@ -97,16 +97,37 @@ def payment_data_type(request):
 
 
 @pytest.fixture(params=[
-
+    ([Car("1234 ABC", "Toyota", "BCN", 120, 4), Car("6690 HKR", "Subaru", "ROM", 150, 4), Car("7642 DPN", "Tesla", "ATH", 400, 3)]),
+    ([Car("8321 SKR", "Tesla", "ATH", 400, 3), Car("9935 PAN", "Kia", "LYN", 170, 4)])
+    ([Car("1234 ABC", "Toyota", "BCN", 120, 4), Car("8654 FGN", "Peugeot", "NYC", 200, 5), Car("1248 ARN", "Audi", "LA", 210, 6)]),
+    ([Car("9621 XYZ", "Citroen", "PAR", 160, 5)]),
+    ([Car("6690 HKR", "Subaru", "ROM", 150, 4), Car("3420 BRM", "Nissan", "BER", 280, 6)]),
+    ([Car("8902 MRR", "Mercedes-Benz", "LON", 300, 5), Car("9935 PAN", "Kia", "LYN", 170, 4)]),
+    ([Car("8902 MRR", "Mercedes-Benz", "LON", 300, 5), Car("1234 ABC", "Toyota", "BCN", 120, 4), Car("9621 XYZ", "Citroen", "PAR", 160, 5)]),
+    ([Car("7642 DPN", "Ford", "PRA", 180, 4), Car("1248 ARN", "Audi", "LA", 210, 6)]),
+    ([Car("8654 FGN", "Peugeot", "NYC", 200, 5), Car("9621 XYZ", "Citroen", "PAR", 160, 5)]),
+    ([Car("9621 XYZ", "Citroen", "PAR", 160, 5), Car("9935 PAN", "Kia", "LYN", 170, 4), Car("1234 ABC", "Toyota", "BCN", 120, 4)]),
 ])
 def cars(request):
-    pass
+    cars = cars()
+    cars.add_cars(request.param)
+    return cars, request.param
 
 @pytest.fixture(params=[
+    Car("1234 ABC", "Toyota", "BCN", 120, 4),
+    Car("3420 BRM", "Nissan", "BER", 280, 6),
+    Car("9621 XYZ", "Citroen", "PAR", 160, 5),
+    Car("8902 MRR", "Mercedes-Benz", "LON", 300, 5),
+    Car("6690 HKR", "Subaru", "ROM", 150, 4),
+    Car("7642 DPN", "Ford", "PRA", 180, 4),
+    Car("8321 SKR", "Tesla", "ATH", 400, 3),
+    Car("9935 PAN", "Kia", "LYN", 170, 4),
+    Car("8654 FGN", "Peugeot", "NYC", 200, 5),
+    Car("1248 ARN", "Audi", "LA", 210, 6),
 
 ])
 def car(request):
-    pass
+    return request.param
 
 @pytest.fixture(params=[
 

@@ -60,7 +60,7 @@ class TestCaseV1:
 
     def test_add_flight_price_multiple_passengers(self, flights_multiple_passengers, flight):
         expected_output = flight.get_price()
-        for f in flights_multiple_passengers[1][2]:
+        for f in flights_multiple_passengers[1][2]: 
             expected_output += f.get_price()
         expected_output *= flights_multiple_passengers[1][0]
 

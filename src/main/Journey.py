@@ -44,4 +44,6 @@ class Journey:
         self.payment_data.calculate_reserve_amount(self.flights, self.hotels, self.cars)
         return self.bank.do_payment(self.user, self.payment_data)
 
+    def confirm_reserve_cars(self):
+        return self.RentalCars.confirm_reserve(self.user, self.flights)
 
