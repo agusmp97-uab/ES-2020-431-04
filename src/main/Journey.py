@@ -34,6 +34,12 @@ class Journey:
     def get_payment_type(self):
         return self.payment_data.get_payment_type()
 
+    def get_cars(self):
+        return self.cars
+
+    def get_reserve_amount(self):
+        self.payment_data.calculate_reserve_amount(self.flights, self.hotels, self.cars)
+
     def set_user(self, user):
         self.user = user
 
@@ -47,3 +53,5 @@ class Journey:
     def confirm_reserve_cars(self):
         return self.rentalcars.confirm_reserve(self.user, self.cars)
 
+    def confirm_reserve_hotels(self):
+        return self.skyscanner.confirm_reserve(self.user, self.hotels)

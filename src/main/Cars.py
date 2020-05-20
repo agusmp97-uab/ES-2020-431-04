@@ -20,13 +20,13 @@ class Cars:
         for car in cars:
             self.cars.append(car)
             self.total_price += car.get_price()
-        #return self
+        return self
 
     def remove_car(self, car) -> None:
         cars_aux = []
-        for car in self.cars:
-            if car.get_id() == car.get_id():
-                self.total_price -= car.get_price()
+        for c in self.cars:
+            if c.get_id() == car.get_id():
+                self.total_price -= c.get_price()
             else:
-                cars_aux.append(car)
+                cars_aux.append(c)
         self.cars = cars_aux

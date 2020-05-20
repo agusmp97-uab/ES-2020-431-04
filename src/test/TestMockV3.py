@@ -17,6 +17,7 @@ class TestMockV3:
         assert journey.confirm_reserve_cars() is True
 
 
+    """
     def test_do_reserve_cars_fail(self, monkeypatch, cars, user, payment_data):
         def mock_return(self, user, aux):
             return False
@@ -24,3 +25,12 @@ class TestMockV3:
         monkeypatch.setattr(Rentalcars, "confirm_reserve", mock_return)
         journey = Journey(flights_multiple_passengers[0], user, payment_data[0], cars[0], hotels[0])
         assert journey.confirm_reserve_cars() is False
+    """
+
+    def test_do_hotel_reserve(self, monkeypatch, flights_multiple_passengers, user, payment_data, hotels):
+        def mock_return(self, user, hotels):
+            return True
+        monkeypatch.setattr(Skyscanner, "confirm_reserve", mock_return)
+
+        journey = Journey(flights_multiple_passengers[0], user, payment_data[0], hotels[0], None)
+        assert journey.confirm_reserve_hotels() is True

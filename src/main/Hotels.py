@@ -19,9 +19,9 @@ class Hotels:
 
     def remove_hotel(self, hotel) -> None:
         hotels_aux = []
-        for hotel in self.hotels:
-            if hotel.get_id() == hotel.get_id():
-                self.total_price -= hotel.get_price()
+        for h in self.hotels:
+            if h.get_id() == hotel.get_id():
+                self.total_price -= h.get_price()
             else:
-                hotels_aux.append(hotel)
+                hotels_aux.append(h)
         self.hotels = hotels_aux

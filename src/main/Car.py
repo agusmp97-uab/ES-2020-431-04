@@ -10,4 +10,5 @@ class Car:
         return self.id
 
     def get_price(self) -> float:
-        return self.price * self.days_reserved
+        total_price = self.price*self.days_reserved
+        return total_price

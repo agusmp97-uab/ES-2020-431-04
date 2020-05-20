@@ -5,6 +5,8 @@ from src.main.User import User
 from src.main.PaymentData import PaymentData
 from src.main.Cars import Cars
 from src.main.Car import Car
+from src.main.Hotel import Hotel
+from src.main.Hotels import Hotels
 from src.main.Journey import Journey
 from src.main.Bank import Bank
 from src.main.Skyscanner import Skyscanner
@@ -132,13 +134,28 @@ def car(request):
     return request.param
 
 @pytest.fixture(params=[
-
+    ([Hotel("13314", "Grand Hotel Budapest", 4, 2, 3, 50), Hotel("66190", "Majestic", 4, 2, 1, 45), Hotel("76142", "Hillton", 4, 2, 2, 60)]),
+    ([Hotel("83211", "Great Alex Resort", 2, 1, 5, 100), Hotel("99135", "Ibis", 2, 1, 3, 30)]),
+    ([Hotel("99135", "Ibis", 3, 2, 3, 30), Hotel("66190", "Majestic", 3, 2, 6, 45), Hotel("77778", "Dubai Star", 3, 2, 2, 90)]),
+    ([Hotel("13314", "Grand Hotel Budapest", 3, 2, 3, 50),Hotel("66190", "Majestic", 3, 2, 6, 45)]),
+    ([Hotel("13456", "Imperial Hotel", 2, 1, 7, 70),Hotel("83211", "Great Alex Resort", 2, 1, 5, 100),Hotel("76142", "Hillton", 2, 1, 2, 60)]),
+    ([Hotel("99135", "Ibis", 2, 1, 3, 30),Hotel("66190", "Majestic", 2, 1, 1, 45)]),
+    ([Hotel("77778", "Dubai Star", 3, 2, 2, 90),Hotel("83211", "Great Alex Resort", 3, 2, 5, 100),Hotel("13314", "Grand Hotel Budapest", 3, 2, 3, 50)]),
+    ([Hotel("83211", "Great Alex Resort", 6, 3, 5, 100), Hotel("99135", "Ibis", 6, 3, 3, 30)]),
+    ([Hotel("99135", "Ibis", 1, 1, 3, 30), Hotel("66190", "Majestic", 1, 1, 6, 45), Hotel("77778", "Dubai Star", 1, 1, 2, 90)]),
 ])
 def hotels(request):
-    pass
+    hotels = Hotels()
+    hotels.add_hotels(request.param)
+    return hotels, request.param
 
 @pytest.fixture(params=[
-
+    Hotel("13314", "Grand Hotel Budapest", 4, 2, 3, 50),
+    Hotel("66190", "Majestic", 4, 2, 1, 45),
+    Hotel("76142", "Hilton", 4, 2, 2, 60),
+    Hotel("83211", "Great Alex Resort", 2, 1, 5, 100),
+    Hotel("99135", "Ibis", 2, 1, 3, 30),
+    Hotel("77778", "Dubai Star", 3, 1, 2, 90)
 ])
 def hotel(request):
-    pass
+    return request.param
