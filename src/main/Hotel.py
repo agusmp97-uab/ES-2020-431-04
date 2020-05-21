@@ -11,4 +11,4 @@ class Hotel:
         return self.id
 
     def get_price(self) -> float:
-        return self.price * self.n_rooms * self.n_days
+        return self.price * self.n_guests * self.n_days
