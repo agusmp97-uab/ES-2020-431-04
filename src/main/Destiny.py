@@ -4,13 +4,16 @@ from . import Car
 
 
 class Destiny:
-    def __init__(self, flight, n_passengers, n_days, hotel=None, cars=[]):
-        self.flight = flight
+    def __init__(self, flight, n_passengers, n_days=0, hotel=None, cars=[]):
+        self.flight = flight                #  n_days ho indicarà l'hotel? o o afegim al vol?
         self.name = flight.get_destiny()
         self.n_passengers = n_passengers
         self.n_days = n_days
         self.hotel = hotel
         self.cars = cars
+
+    def get_name(self):
+        return self.name
 
     def set_hotel(self, hotel):
         self.hotel = hotel
