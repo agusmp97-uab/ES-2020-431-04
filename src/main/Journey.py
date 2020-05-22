@@ -36,6 +36,7 @@ class Journey:
         self.user = None
         #Information of the user that will appear on the bill data
         self.billing_user = None
+        self.IVA = 0.21
 
     """ Returns the total price of the journey, given by its flights, hotels and cars"""
     def get_total_price(self) -> float:
@@ -45,6 +46,10 @@ class Journey:
         if self.return_flight is not None:
             total_price += self.return_flight.get_price() * self.n_passengers
         return total_price
+
+    """ Returns the total price of the journey, given by its flights, hotels and cars"""
+    def get_total_price_IVA(self) -> float:
+        return self.get_total_price() * self.IVA
 
     """ Returns the origin (string) of the journey"""
     def get_origin(self) -> str:
