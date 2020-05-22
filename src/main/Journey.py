@@ -97,7 +97,7 @@ class Journey:
         return response
 
     def get_cars(self) -> Cars:
-        cars = Cars()
+        cars = Cars.Cars()
         for i in range(self.destinies.get_len()):
             cars.add_cars(self.destinies.get_cars(i))
         return cars
@@ -144,7 +144,7 @@ class Journey:
     #     return self.rentalcars.confirm_reserve(self.user, self.get_cars)  # superat maxim intents
 
     def get_hotels(self) -> Hotels:
-        hotels = Hotels()
+        hotels = Hotels.Hotels()
         for i in range(self.destinies.get_len()):
             if self.destinies.get_hotel(i) is not None:
                 hotels.add_hotel(self.destinies.get_hotel(i))
