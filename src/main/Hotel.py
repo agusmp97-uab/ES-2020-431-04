@@ -1,3 +1,5 @@
+
+"""class containing the information of a hotel"""
 class Hotel:
     def __init__(self, id_hotel, hotel_name, n_rooms, price):
         self.id = id_hotel

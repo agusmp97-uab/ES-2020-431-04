@@ -1,3 +1,6 @@
+
+
+"""class containing the information of a car"""
 class Car:
     def __init__(self, code, brand, pick_up_place, price):
         self.code = code

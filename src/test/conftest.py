@@ -13,6 +13,7 @@ from src.main.Skyscanner import Skyscanner
 from src.main.Booking import Booking
 from src.main.Rentalcars import Rentalcars
 
+""" Fixtures used on the tests"""
 
 @pytest.fixture(params=[1, 2, 3, 4, 5, 6, 7, 0, 23, 50])
 def empty_journey(request):

@@ -1,4 +1,5 @@
 
+"""class containing the information of a flight"""
 class Flight:
     def __init__(self, destiny, id_flight, price):
         self.id = id_flight

@@ -5,6 +5,7 @@ from src.main.Flight import *
 
 
 class TestCaseV3:
+    """ When adding a car to a journey with multiple destinies and multiple passengers, the price is as expected"""
     def test_add_car(self, cars, journey):
         expected_output = journey.get_total_price()
         for i in range(len(cars[0])):
@@ -14,6 +15,8 @@ class TestCaseV3:
 
         assert journey.get_total_price() == expected_output
 
+
+    """ When removing a car from a journey with multiple destinies and multiple passengers, the price is as expected"""
     def test_remove_cars(self, journey_with_cars, car):
         expected_output = journey_with_cars.get_total_price()
         n_days = journey_with_cars.get_n_days(car[0])
@@ -24,6 +27,7 @@ class TestCaseV3:
         assert journey_with_cars.get_total_price() == expected_output
 
 
+    """ When adding a hotel to a journey with multiple destinies and multiple passengers, the price is as expected"""
     def test_add_hotels(self, hotels, journey_with_cars):
         expected_output = journey_with_cars.get_total_price()
         n_passengers = journey_with_cars.get_n_passengers()
@@ -34,6 +38,8 @@ class TestCaseV3:
 
         assert journey_with_cars.get_total_price() == expected_output
 
+    """ When removing a hotel from a journey with multiple destinies and multiple passengers,
+     the price is as expected"""
     def test_remove_hotels(self, journey_with_cars_and_hotels, hotel):
         expected_output = journey_with_cars_and_hotels.get_total_price()
         n_passengers = journey_with_cars_and_hotels.get_n_passengers()

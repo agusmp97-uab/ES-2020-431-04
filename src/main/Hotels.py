@@ -1,5 +1,5 @@
 
-
+""" Class encapsulating a list of hotels"""
 class Hotels:
     def __init__(self):
         self.hotels = []

@@ -2,19 +2,24 @@ from src.test.conftest import *
 
 
 class TestCaseV1:
+    """ In a journey with multiple passengers, the number of passengers is as expected"""
     def test_passengers(self, journey_multiple_passengers):
 
         assert journey_multiple_passengers[0].get_n_passengers() == journey_multiple_passengers[1][0]
 
+    """ In a journey without destinies, there are no destinies"""
     def test_empty_flights_destinies(self, empty_journey):
         assert empty_journey.get_destinies_names() == []
 
+    """ In a journey without destinies, there are no flights"""
     def test_empty_flights_flights(self, empty_journey):
         assert empty_journey.get_flights().flights == Flights().flights
 
+    """ In a journey without destinies, the total price is 0"""
     def test_empty_flights_price(self, empty_journey):
         assert empty_journey.get_total_price() == 0
 
+    """ When adding a flight to a journey with one passenger, the destinies are as expected"""
     def test_add_flight_destinies(self, journey_1_passenger, flight, n_days):
         expected_output = []
         for f in journey_1_passenger[1][3]:
@@ -26,6 +31,7 @@ class TestCaseV1:
         journey_1_passenger[0].add_destiny(flight, n_days)
         assert journey_1_passenger[0].get_destinies_names() == expected_output
 
+    """ When adding a flight to a journey with one passenger, the flights are as expected"""
     def test_add_flight_flights(self, journey_1_passenger, flight, n_days):
         flights = journey_1_passenger[1][3]
         expected_output = Flights()
@@ -35,6 +41,7 @@ class TestCaseV1:
         journey_1_passenger[0].add_destiny(flight, n_days)
         assert journey_1_passenger[0].get_flights() == expected_output
 
+    """ When adding a flight to a journey with one passenger, the total price is as expected"""
     def test_add_flight_price(self, journey_1_passenger, flight, n_days):
         expected_output = 0
         for f in journey_1_passenger[1][3]:
@@ -46,6 +53,8 @@ class TestCaseV1:
         journey_1_passenger[0].add_destiny(flight, n_days)
         assert journey_1_passenger[0].get_total_price() == expected_output
 
+    """ When adding a flight to a journey with multiple passengers and multiple destinies,
+     the destinies are as expected"""
     def test_add_flight_destinies_multiple_passengers(self, journey_multiple_passengers, flight, n_days):
         expected_output = []
         for f in journey_multiple_passengers[1][3]:
@@ -57,6 +66,8 @@ class TestCaseV1:
         journey_multiple_passengers[0].add_destiny(flight, n_days)
         assert journey_multiple_passengers[0].get_destinies_names() == expected_output
 
+    """ When adding a flight to a journey with multiple passengers and multiple destinies,
+     the flights are as expected"""
     def test_add_flight_flights_multiple_passengers(self, journey_multiple_passengers, flight, n_days):
         flights = journey_multiple_passengers[1][3]
         expected_output = Flights()
@@ -66,6 +77,8 @@ class TestCaseV1:
         journey_multiple_passengers[0].add_destiny(flight, n_days)
         assert journey_multiple_passengers[0].get_flights() == expected_output
 
+    """ When adding a flight to a journey with multiple passengers and multiple destinies,
+     the total price is as expected"""
     def test_add_flight_price_multiple_passengers(self, journey_multiple_passengers, flight):
         expected_output = 0
         for f in journey_multiple_passengers[1][3]:
@@ -77,6 +90,8 @@ class TestCaseV1:
         journey_multiple_passengers[0].add_destiny(flight, n_days)
         assert journey_multiple_passengers[0].get_total_price() == expected_output
 
+    """ When removing a flight from a journey with multiple passengers and multiple destinies,
+     the destinies are as expected"""
     def test_remove_destiny_destiny(self, journey_multiple_passengers, destiny):
         expected_output = []
         for f in journey_multiple_passengers[1][3]:
@@ -87,6 +102,8 @@ class TestCaseV1:
         journey_multiple_passengers[0].remove_destiny(destiny)
         assert journey_multiple_passengers[0].get_destinies_names() == expected_output
 
+    """ When removing a flight from a journey with multiple passengers and multiple destinies,
+     the flights are as expected"""
     def test_remove_destiny_flights(self, journey_multiple_passengers, destiny):
         expected_output = Flights()
         for f in journey_multiple_passengers[1][3][0:-1]:
@@ -97,6 +114,8 @@ class TestCaseV1:
         journey_multiple_passengers[0].remove_destiny(destiny)
         assert journey_multiple_passengers[0].get_flights() == expected_output
 
+    """ When removing a flight from a journey with multiple passengers and multiple destinies,
+     the total price is as expected"""
     def test_remove_destiny_price(self, journey_multiple_passengers, destiny):
         expected_output = 0
         for f in journey_multiple_passengers[1][3][0:-1]:
