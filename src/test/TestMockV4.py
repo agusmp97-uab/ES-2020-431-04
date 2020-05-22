@@ -16,14 +16,16 @@ class TestMockV4:
         monkeypatch.setattr(Bank, "do_payment", mock_return)
 
         journey_multiple_passengers[0].add_payment_data(payment_data)
-        journey_multiple_passengers[0].do_payment(billing_user)
+        journey_multiple_passengers[0].add_billing_user(billing_user)
+        journey_multiple_passengers[0].do_payment()
         assert journey_multiple_passengers[0].get_tryings() < 2
 
     def test_retry_payment_success(self, monkeypatch, journey_multiple_passengers, billing_user, payment_data):
         Bank.do_payment.side_effect = [False, True]
 
         journey_multiple_passengers[0].add_payment_data(payment_data)
-        assert journey_multiple_passengers[0].do_payment(billing_user) is True
+        journey_multiple_passengers[0].add_billing_user(billing_user)
+        assert journey_multiple_passengers[0].do_payment() is True
 
     def test_retry_payment_max_reties(self, monkeypatch, journey_multiple_passengers, billing_user, payment_data):
         def mock_return(self, user, payment_data):
@@ -31,7 +33,8 @@ class TestMockV4:
 
         monkeypatch.setattr(Bank, "do_payment", mock_return)
         journey_multiple_passengers[0].add_payment_data(payment_data)
-        assert journey_multiple_passengers[0].do_payment(billing_user) is False
+        journey_multiple_passengers[0].add_billing_user(billing_user)
+        assert journey_multiple_passengers[0].do_payment() is False
 
     def test_retry_flights_reserve(self, monkeypatch, journey_multiple_passengers, user):
         def mock_return(self, user, flight):

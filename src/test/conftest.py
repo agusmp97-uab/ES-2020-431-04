@@ -101,6 +101,18 @@ def billing_user(request):
     return request.param
 
 @pytest.fixture(params=[
+    User("Pep Sanchez Sanchez23", "12345678A", "09234", "666666666", "pep@sanchez.com"),
+    User("Pep Sanchez Sanchez", "12345678A", "09234", "666666666", "patata"),
+    User("Pep Sanchez Sanchez", "12345678A", "09234", "66666", "pep@sanchez.com"),
+    User("Nora Castillo Pujol", "987654322", "93845", "678912345", "crispeta@gmail.es"),
+    User("Nora Castillo Pujol", "98765432B", "945", "678912345", "crispeta@gmail.es"),
+    User("Nora Castillo Pujol", "9876543BB", "93845", "678912345", "crispeta@gmail.es"),
+    User("Nora Castillo Pujol", "987654322", "93845", "HOLA", "crispeta@gmail.es")
+])
+def incorrect_billing_user(request):
+    return request.param
+
+@pytest.fixture(params=[
     ("VISA", "Pep Sanchez Sanchez", "123456789", "1234"),
 ])
 def payment_data(request):

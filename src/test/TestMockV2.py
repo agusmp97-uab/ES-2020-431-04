@@ -14,7 +14,8 @@ class TestMockV2:
         monkeypatch.setattr(Bank, "do_payment", mock_return)
 
         journey_multiple_passengers[0].add_payment_data(payment_data_type[0])
-        assert journey_multiple_passengers[0].do_payment(billing_user) == payment_data_type[1][0]
+        journey_multiple_passengers[0].add_billing_user(billing_user)
+        assert journey_multiple_passengers[0].do_payment() == payment_data_type[1][0]
 
     def test_do_payment_fail(self, monkeypatch, journey_multiple_passengers, billing_user, payment_data):
         def mock_return(self, user, payment_data):
@@ -22,7 +23,8 @@ class TestMockV2:
         monkeypatch.setattr(Bank, "do_payment", mock_return)
 
         journey_multiple_passengers[0].add_payment_data(payment_data)
-        assert journey_multiple_passengers[0].do_payment(billing_user) is False
+        journey_multiple_passengers[0].add_billing_user(billing_user)
+        assert journey_multiple_passengers[0].do_payment() is False
 
     def test_do_reserve_fail(self, monkeypatch, journey_multiple_passengers, user):
         def mock_return(self, user, aux):

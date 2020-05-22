@@ -9,7 +9,8 @@ class TestMockV1:
         monkeypatch.setattr(Bank, "do_payment", mock_return)
 
         journey_multiple_passengers[0].add_payment_data(payment_data)
-        assert journey_multiple_passengers[0].do_payment(billing_user) is True
+        journey_multiple_passengers[0].add_billing_user(billing_user)
+        assert journey_multiple_passengers[0].do_payment() is True
 
     def test_do_reserve(self, monkeypatch, user, journey_multiple_passengers):
         def mock_return(self, user, flights):

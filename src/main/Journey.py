@@ -29,6 +29,7 @@ class Journey:
         self.return_flight = None
         self.user = None
         self.payment_data = None
+        self.billing_user = None
 
     def get_total_price(self) -> float:
         total_price = 0
@@ -152,12 +153,22 @@ class Journey:
     def set_payment_import(self):
         self.payment_data.set_reserve_amount(self.get_total_price())
 
-    def do_payment(self, billing_user):
+    def add_billing_user(self, billing_user):
+        if billing_user.check_billing_user() is True:
+            self.billing_user = billing_user
+            return True
+        else:
+            return False
+
+    def get_billing_user(self):
+        return self.billing_user
+
+    def do_payment(self):
         self.tryings = 3
         response = False
         while self.tryings > 0:
             self.tryings -= 1
-            response = self.bank.do_payment(billing_user, self.payment_data)
+            response = self.bank.do_payment(self.billing_user, self.payment_data)
             if response is True:
                 return response
         return response

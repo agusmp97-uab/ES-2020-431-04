@@ -4,15 +4,16 @@ from src.main.Journey import Journey
 
 class TestMockV5:
 
-    def test_billing_user
-    def test_retry_reserve_cars(self, monkeypatch, journey_with_cars, user):
-        def mock_return(self, user, cars):
-            return False
-        monkeypatch.setattr(Rentalcars, "confirm_reserve", mock_return)
+    def test_correct_billing_user(self,  journey_with_cars, billing_user):
+        assert journey_with_cars.add_billing_user(billing_user) is True
 
-        journey_with_cars.add_user(user)
-        journey_with_cars.confirm_reserve_cars()
-        assert journey_with_cars.get_tryings() < 2
+    def test_incorrect_billing_user(self, journey_with_cars, incorrect_billing_user):
+        assert journey_with_cars.add_billing_user(incorrect_billing_user) is False
+
+    def test_complete_billing_data(self, journey_with_cars, billing_user):
+        journey_with_cars.add_billing_user(billing_user)
+
+        assert journey_with_cars.get_billing_user() == billing_user
 
     def test_retry_reserve_cars_success(self, journey_with_cars, user):
         Skyscanner.confirm_reserve.side_effect = [False, True]
