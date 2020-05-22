@@ -80,13 +80,6 @@ class Journey:
         self.destinies = destinies_aux
 
     def confirm_reserve_flights(self):
-        # tryings = self.tryings
-        # while tryings > 1:
-        #     tryings -= 1
-        #     if self.skyscanner.confirm_reserve(self.user, self.get_flights()) is True:
-        #         return True
-        # return False
-
         self.tryings = 3
         response = False
         while self.tryings > 0:
@@ -113,13 +106,6 @@ class Journey:
                 self.destinies.remove_car(i, code)
 
     def confirm_reserve_cars(self):
-        # tryings = self.tryings
-        # while tryings > 0:
-        #     tryings -= 1
-        #     if self.rentalcars.confirm_reserve(self.user, self.get_cars()) is True:
-        #         return True
-        # return False
-
         self.tryings = 3
         response = False
         while self.tryings > 0:
@@ -128,20 +114,6 @@ class Journey:
             if response is True:
                 return response
         return response
-
-    # def confirm_reserve_cars(self):
-    #     self.tryings -= 1
-    #     if self.rentalcars.confirm_reserve(self.user, self.get_cars) is True:
-    #         return True
-    #     else:
-    #         return self.retry_reserve_cars()
-    #
-    # def retry_reserve_cars(self):
-    #     while self.tryings > 1:
-    #         self.tryings -= 1
-    #         if self.rentalcars.confirm_reserve(self.user, self.get_cars) is True:
-    #             return True
-    #     return self.rentalcars.confirm_reserve(self.user, self.get_cars)  # superat maxim intents
 
     def get_hotels(self) -> Hotels:
         hotels = Hotels.Hotels()
@@ -161,13 +133,6 @@ class Journey:
                 self.destinies.remove_hotel(i)
 
     def confirm_reserve_hotels(self):
-        # tryings = self.tryings
-        # while tryings > 0:
-        #     tryings -= 1
-        #     if self.booking.confirm_reserve(self.user, self.get_hotels()) is True:
-        #         return True
-        # return False
-
         self.tryings = 3
         response = False
         while self.tryings > 0:
@@ -195,23 +160,6 @@ class Journey:
             if response is True:
                 return response
         return response
-
-
-    # def do_payment(self):
-    #     self.payment_data.calculate_reserve_amount(self.get_flights, self.get_hotels, self.get_cars)
-    #     self.tryings -= 1
-    #     bank_response = self.bank.do_payment(self.user, self.payment_data)
-    #     if bank_response is True:
-    #         return bank_response  # ho he hagut de posar així pel testMockV2 paymentMethod que cal que retorni method_payment
-    #     else:
-    #         return self.retry_payment()
-    #
-    # def retry_payment(self):
-    #     while self.tryings > 1:
-    #         self.tryings -= 1
-    #         if self.bank.do_payment(self.user, self.payment_data) is True:
-    #             return self.bank.do_payment(self.user, self.payment_data)
-    #     return self.bank.do_payment(self.user, self.payment_data)  # superat maxim intents
 
     def get_payment_type(self):
         return self.payment_data.get_payment_type()

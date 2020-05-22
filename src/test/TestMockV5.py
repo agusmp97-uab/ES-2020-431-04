@@ -24,7 +24,6 @@ class TestMockV5:
         monkeypatch.setattr(Rentalcars, "confirm_reserve", mock_return)
         assert journey_with_cars.confirm_reserve_cars() is False
 
-
     def test_retry_reserve_hotel(self, monkeypatch, journey_with_cars_and_hotels, user, hotels):
         def mock_return(self, user, hotels):
             return False
@@ -38,7 +37,6 @@ class TestMockV5:
         Booking.confirm_reserve.side_effect = [False, True]
 
         assert journey_with_cars_and_hotels.confirm_reserve_hotels() is True
-
 
     def test_retry_hotels_reserve_max_retries(self, monkeypatch, journey_with_cars_and_hotels, user, hotels):
         def mock_return(self, user, hotels):

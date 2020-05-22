@@ -33,7 +33,6 @@ class TestMockV4:
         journey_multiple_passengers[0].add_payment_data(payment_data_type[0])
         assert journey_multiple_passengers[0].do_payment() is False
 
-
     def test_retry_flights_reserve(self, monkeypatch, journey_multiple_passengers, user,flight):
         def mock_return(self, user, flight):
             return False
@@ -46,7 +45,6 @@ class TestMockV4:
         Skyscanner.confirm_reserve.side_effect = [False, True]
 
         assert journey_multiple_passengers[0].confirm_reserve_flights() is True
-
 
     def test_retry_flights_reserve_max_reties(self, monkeypatch, journey_multiple_passengers, user,flight):
         def mock_return(self, user, flight):
