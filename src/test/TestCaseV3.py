@@ -1,44 +1,45 @@
 from src.main.Journey import Journey
 from src.main.Cars import Cars
 from src.main.Hotels import Hotels
+from src.main.Flight import *
+
 
 class TestCaseV3:
+    def test_add_car(self, cars, journey):
+        expected_output = journey.get_total_price()
+        for i in range(len(cars[0])):
+            n_days = journey.get_n_days(cars[0][i])
+            expected_output += n_days * cars[2][i]
+            journey.add_car(cars[0][i], cars[1][i])
 
-    def test_add_cars(self, cars, car):
-        expected_output = car.get_price()
+        assert journey.get_total_price() == expected_output
 
-        for c in cars[1]:
-            expected_output += c.get_price()
+    def test_remove_cars(self, journey_with_cars, car):
+        expected_output = journey_with_cars.get_total_price()
+        n_days = journey_with_cars.get_n_days(car[0])
+        expected_output -= n_days * car[2]
 
-        cars[0].add_car(car)
-        assert cars[0].get_price() == expected_output
-
-
-    def test_remove_cars(self, cars, car):
-        expected_output = 0
-        for c in cars[1]:
-            if c.get_id() != car.get_id():
-                expected_output += c.get_price()
-
-        cars[0].remove_car(car)
-        assert cars[0].get_price() == expected_output
+        journey_with_cars.remove_car(car[0], car[1].get_code())
+        x = journey_with_cars.get_total_price()
+        assert journey_with_cars.get_total_price() == expected_output
 
 
-    def test_add_hotels(self, hotels, hotel):
-        expected_output = hotel.get_price()
+    def test_add_hotels(self, hotels, journey_with_cars):
+        expected_output = journey_with_cars.get_total_price()
+        n_passengers = journey_with_cars.get_n_passengers()
+        for i in range(len(hotels[0])):
+            n_days = journey_with_cars.get_n_days(hotels[0][i])
+            expected_output += n_passengers * n_days * hotels[2][i]
+            journey_with_cars.add_hotel(hotels[0][i], hotels[1][i])
 
-        for h in hotels[1]:
-            expected_output += h.get_price()
+        assert journey_with_cars.get_total_price() == expected_output
 
-        hotels[0].add_hotel(hotel)
-        assert hotels[0].get_price() == expected_output
+    def test_remove_hotels(self, journey_with_cars_and_hotels, hotel):
+        expected_output = journey_with_cars_and_hotels.get_total_price()
+        n_passengers = journey_with_cars_and_hotels.get_n_passengers()
+        n_days = journey_with_cars_and_hotels.get_n_days(hotel[0])
+        expected_output -= n_passengers * n_days * hotel[2]
 
-    def test_remove_hotels(self, hotels, hotel):
-        expected_output = 0
+        journey_with_cars_and_hotels.remove_hotel(hotel[0])
+        assert journey_with_cars_and_hotels.get_total_price() == expected_output
 
-        for h in hotels[1]:
-            if h.get_id() != hotel.get_id():
-                expected_output += h.get_price()
-
-        hotels[0].remove_hotel(hotel)
-        assert hotels[0].get_price() == expected_output
