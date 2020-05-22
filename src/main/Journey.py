@@ -14,8 +14,8 @@ from . import Bank
 
 
 class Journey:
-    def __init__(self, n_passengers, origin, tryings=3):
-        self.tryings = tryings
+    def __init__(self, n_passengers, origin):
+        self.tryings = 3
 
         self.bank = Bank.Bank()
         self.skyscanner = Skyscanner.Skyscanner()
@@ -147,16 +147,17 @@ class Journey:
 
     def add_payment_data(self, payment_data):
         self.payment_data = payment_data
+        self.set_payment_import()
 
     def set_payment_import(self):
         self.payment_data.set_reserve_amount(self.get_total_price())
 
-    def do_payment(self):
+    def do_payment(self, billing_user):
         self.tryings = 3
         response = False
         while self.tryings > 0:
             self.tryings -= 1
-            response = self.bank.do_payment(self.user, self.payment_data)
+            response = self.bank.do_payment(billing_user, self.payment_data)
             if response is True:
                 return response
         return response

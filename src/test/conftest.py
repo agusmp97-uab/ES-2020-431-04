@@ -94,11 +94,18 @@ def user(request):
     return request.param
 
 @pytest.fixture(params=[
+    User("Pep Sanchez Sanchez", "12345678A", "09234", "666666666", "pep@sanchez.com"),
+    User("Nora Castillo Pujol", "98765432Z", "93845", "678912345", "crispeta@gmail.es")
+])
+def billing_user(request):
+    return request.param
+
+@pytest.fixture(params=[
     ("VISA", "Pep Sanchez Sanchez", "123456789", "1234"),
 ])
 def payment_data(request):
     payment_data = PaymentData(request.param[0], request.param[1], request.param[2], request.param[3])
-    return payment_data, request.param
+    return payment_data
 
 @pytest.fixture(params=[
     ("VISA", "Pep Sanchez Sanchez", "123456789", "1234"),
