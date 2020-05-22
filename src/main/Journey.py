@@ -80,12 +80,21 @@ class Journey:
         self.destinies = destinies_aux
 
     def confirm_reserve_flights(self):
-        tryings = self.tryings
-        while tryings > 1:
-            tryings -= 1
-            if self.skyscanner.confirm_reserve(self.user, self.get_flights()) is True:
-                return True
-        return False
+        # tryings = self.tryings
+        # while tryings > 1:
+        #     tryings -= 1
+        #     if self.skyscanner.confirm_reserve(self.user, self.get_flights()) is True:
+        #         return True
+        # return False
+
+        self.tryings = 3
+        response = False
+        while self.tryings > 0:
+            self.tryings -= 1
+            response = self.skyscanner.confirm_reserve(self.user, self.get_flights())
+            if response is True:
+                return response
+        return response
 
     def get_cars(self) -> Cars:
         cars = Cars()
@@ -104,12 +113,21 @@ class Journey:
                 self.destinies.remove_car(i, code)
 
     def confirm_reserve_cars(self):
-        tryings = self.tryings
-        while tryings > 0:
-            tryings -= 1
-            if self.rentalcars.confirm_reserve(self.user, self.get_cars()) is True:
-                return True
-        return False
+        # tryings = self.tryings
+        # while tryings > 0:
+        #     tryings -= 1
+        #     if self.rentalcars.confirm_reserve(self.user, self.get_cars()) is True:
+        #         return True
+        # return False
+
+        self.tryings = 3
+        response = False
+        while self.tryings > 0:
+            self.tryings -= 1
+            response = self.rentalcars.confirm_reserve(self.user, self.get_cars())
+            if response is True:
+                return response
+        return response
 
     # def confirm_reserve_cars(self):
     #     self.tryings -= 1
@@ -143,12 +161,21 @@ class Journey:
                 self.destinies.remove_hotel(i)
 
     def confirm_reserve_hotels(self):
-        tryings = self.tryings
-        while tryings > 0:
-            tryings -= 1
-            if self.booking.confirm_reserve(self.user, self.get_hotels()) is True:
-                return True
-        return False
+        # tryings = self.tryings
+        # while tryings > 0:
+        #     tryings -= 1
+        #     if self.booking.confirm_reserve(self.user, self.get_hotels()) is True:
+        #         return True
+        # return False
+
+        self.tryings = 3
+        response = False
+        while self.tryings > 0:
+            self.tryings -= 1
+            response = self.booking.confirm_reserve(self.user, self.get_hotels())
+            if response is True:
+                return response
+        return response
 
     def add_user(self, user):
         self.user = user
@@ -160,12 +187,14 @@ class Journey:
         self.payment_data.set_reserve_amount(self.get_total_price())
 
     def do_payment(self):
-        tryings = self.tryings
-        while tryings > 0:
-            tryings -= 1
-            if self.bank.do_payment(self.user, self.payment_data) is True:
-                return True
-        return False
+        self.tryings = 3
+        response = False
+        while self.tryings > 0:
+            self.tryings -= 1
+            response = self.bank.do_payment(self.user, self.payment_data)
+            if response is True:
+                return response
+        return response
 
 
     # def do_payment(self):
@@ -186,3 +215,7 @@ class Journey:
 
     def get_payment_type(self):
         return self.payment_data.get_payment_type()
+
+    def get_tryings(self):
+        return self.tryings
+
